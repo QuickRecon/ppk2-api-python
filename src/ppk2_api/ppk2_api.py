@@ -134,18 +134,8 @@ class PPK2_API():
         if mV > self.vdd_high:
             mV = self.vdd_high
 
-        offset = 32
-        # get difference to baseline (the baseline is 800mV but the initial offset is 32)
-        diff_to_baseline = mV - self.vdd_low + offset
-        base_b_1 = 3
-        base_b_2 = 0  # is actually 32 - compensated with above offset
-
-        # get the number of times we have to increase the first byte of the command
-        ratio = int(diff_to_baseline / 256)
-        remainder = diff_to_baseline % 256  # get the remainder for byte 2
-
-        set_b_1 = base_b_1 + ratio
-        set_b_2 = base_b_2 + remainder
+        set_b_1 = mV >> 8
+        set_b_2 = mV & 0xFF
 
         return set_b_1, set_b_2
 
