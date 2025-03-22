@@ -99,7 +99,7 @@ class PPK2_API():
         """Destructor"""
         try:
             # reset device
-            self._write_serial((PPK2_Command.RESET,))
+            #self._write_serial((PPK2_Command.RESET,))
 
             if self.ser:
                 self.ser.close()
